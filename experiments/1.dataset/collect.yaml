@@ -1,0 +1,7 @@
+time:
+  due: 50
+  dt: 0.02
+  sampling: 0.1
+
+save:
+  path: result/dataset
