@@ -2,7 +2,7 @@
 
 import xtools as xt
 import xtools.simulation as xs
-from fdair.envs import LVAircraft
+from fdair.envs.lvaircraft import LVAircraft
 
 
 def run():
@@ -13,7 +13,7 @@ def run():
     for time in xs.generate_step_time(10, sampling_interval):
         if time == 5.0:
             env.elevator.set_fail_mode(env.elevator.RATE, xt.d2r(0.1))
-        state = env.step(xt.d2r(3))
+        env.step(xt.d2r(3))
         print(time, xt.r2d(env.elevator.state))
 
 
