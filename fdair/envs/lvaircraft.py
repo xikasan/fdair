@@ -5,6 +5,7 @@ import xtools as xt
 from .dynamics import LVDynamics
 from .csurface import Elevator
 
+
 class LVAircraft:
 
     def __init__(self, dt, sampling_interval):
@@ -19,3 +20,8 @@ class LVAircraft:
             de = self.elevator.step(command)
             state = self.dynamics.step(de)
         return state
+
+    def reset(self):
+        self.elevator.reset()
+        self.dynamics.reset()
+        return self.dynamics.state
