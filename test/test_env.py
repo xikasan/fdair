@@ -2,7 +2,7 @@
 
 import xtools as xt
 import xtools.simulation as xs
-from envs.lvaircraft import LVAircraft
+from fdair.envs import LVAircraft
 
 
 def run():
