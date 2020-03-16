@@ -39,6 +39,8 @@ def run(config):
     # save dir
     cf.save.path = xt.join(cf.save.path, cf.fail.mode)
     cf.save.path = xt.make_dirs_current_time(cf.save.path, exist_ok=True)
+    # result file list
+    result_files = []
 
     # set fail
     cf.fail.mode = MODE[cf.fail.mode]
@@ -50,7 +52,7 @@ def run(config):
         xt.info("round", round)
         roll_over(cf, cmd, env, buf)
 
-        labels = ["time", "dec", "de", "mode", "u", "w", "q", "theta"]
+        labels = ["time", "dec", "de", "u", "w", "q", "theta", "mode"]
         result = pd.DataFrame({
             key: buf[:, i].flatten() for i, key in enumerate(labels)
         })
@@ -62,10 +64,18 @@ def run(config):
         plt.close()
         ax.clear()
 
-        result.to_csv(xt.join(cf.save.path, "{:03}.csv".format(round)))
+        fname = "{:03}.csv".format(round)
+        fname = xt.join(cf.save.path, fname)
+        result_files.append(fname)
+        result.to_csv(fname, index=False)
         del result
 
         buf = reset(env, cmd, buf)
+
+    result_files = np.array(result_files)
+    np.savetxt(xt.join(cf.save.path, "all.txt"), result_files, fmt="%s")
+    print(result_files)
+    # print(result_files.dtype)
 
 
 def reset(env, cmd, buf):
@@ -78,16 +88,15 @@ def reset(env, cmd, buf):
 def roll_over(cf, cmd, env, buf):
     i = 0
     dec, state = cmd.state, env.dynamics.state
-    store = np.concatenate([[0, dec, env.elevator.state, cf.fail.mode], state])
+    store = np.concatenate([[0, dec, env.elevator.state], state, [cf.fail.mode]])
     buf[i, :] = store
 
     for time in xs.generate_step_time(cf.due, cf.sampling.dt):
         i += 1
-        print(i, time)
         dec = cmd.step()
         state = env.step(dec)
         de = env.elevator.state
-        store = np.concatenate([[time, dec, de, cf.fail.mode], state]).astype(np.float32)
+        store = np.concatenate([[time, dec, de], state, [cf.fail.mode]]).astype(np.float32)
         buf[i, :] = store
 
 

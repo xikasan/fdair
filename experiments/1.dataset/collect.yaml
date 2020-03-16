@@ -2,9 +2,9 @@ dt: 0.02
 due: 50
 
 fail:
-  mode: rate
-  value: 2
-  d2r: True
+  mode: normal
+  value: 0.5
+  d2r: False
 
 sampling:
   dt: 0.1
