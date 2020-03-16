@@ -115,12 +115,7 @@ if __name__ == '__main__':
     import xtools as xt
     xt.go_to_root()
 
-    alls = [
-        "result/dataset/normal/2020.03.15.181557/all.txt",
-        "result/dataset/gain/2020.03.15.181538/all.txt",
-        "result/dataset/rate/2020.03.15.181349/all.txt",
-        "result/dataset/saturation/2020.03.15.181125/all.txt"
-    ]
+    alls = np.loadtxt("result/dataset/train.txt", dtype=str)
 
     loader = DataLoader(32)
 
@@ -129,4 +124,4 @@ if __name__ == '__main__':
         loader.load_files(all, pre_process=stack_10step)
 
     for batch in loader:
-        print(batch.xs.shape)
+        print(batch.xs.shape, batch.ys.shape)

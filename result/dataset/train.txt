@@ -1,0 +1,4 @@
+result/dataset/normal/2020.03.15.181557/all.txt
+result/dataset/gain/2020.03.15.181538/all.txt
+result/dataset/rate/2020.03.15.181349/all.txt
+result/dataset/saturation/2020.03.15.181125/all.txt
