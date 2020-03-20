@@ -2,7 +2,9 @@
 
 import numpy as np
 import pandas as pd
+import xtools as xt
 # from cached_property import cached_property
+
 
 class Batch:
 
