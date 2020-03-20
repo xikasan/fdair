@@ -2,9 +2,9 @@ dt: 0.02
 due: 50
 
 fail:
-  mode: normal
-  value: 0.5
-  d2r: False
+  mode: saturation
+  value: 1.0
+  d2r: True
 
 sampling:
   dt: 0.1
@@ -16,5 +16,5 @@ command:
   interval: 2.0
 
 save:
-  num: 20
+  num: 30
   path: result/dataset
