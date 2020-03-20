@@ -1,0 +1,26 @@
+model:
+#  units: [50, 23, 25]
+  units: [16, 16]
+  size:
+    input: 50
+    output: 4
+
+train:
+  lr: 0.001
+  epoch:
+    max: 300
+  batch:
+    size: 100
+  round: 5
+
+data:
+  train: result/dataset/train.txt
+  test: result/dataset/test.txt
+
+save:
+  do: True
+#  do: False
+  directory: results/train/skip
+  model:
+    num: 10
+    interval: 20
