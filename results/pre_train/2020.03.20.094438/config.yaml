@@ -1,0 +1,20 @@
+data:
+  test: result/dataset/test.txt
+  train: result/dataset/train.txt
+model:
+  size:
+    input: 50
+    output: 4
+  units:
+  - 100
+  - 100
+  - 50
+save:
+  directory: results/train
+  do: true
+train:
+  batch:
+    size: 1000
+  epoch:
+    max: 1000
+  lr: 0.001
